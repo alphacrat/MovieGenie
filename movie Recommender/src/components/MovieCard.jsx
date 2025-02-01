@@ -22,7 +22,7 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
         const checkFavoriteStatus = async () => {
             try {
                 const response = await fetch(
-                    'http://localhost:8000/api/v1/movie/saved',
+                    'https://moviegenie-backend-alphacrat.onrender.com/api/v1/movie/saved',
                     {
                         credentials: 'include',
                     }
