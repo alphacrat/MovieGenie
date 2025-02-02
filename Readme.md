@@ -1,14 +1,10 @@
-Here’s a more polished and engaging version of your project description:
-
----
-
 # **MovieGenie** 🎬✨
 
 **MovieGenie** is an innovative movie recommendation platform that goes beyond traditional suggestions. By combining **AI-powered quizzes** with smart recommendation algorithms, it personalizes your movie-watching experience like never before. The AI quiz analyzes your responses to predict your preferred genres, ensuring that every recommendation is tailored to your tastes.
 
 🌟 **Discover movies effortlessly. Engage with AI-driven insights. Enjoy a seamless movie discovery journey!**
 
-🔹 **Live Demo:** [MovieGenie Frontend](https://moviegenie-client.onrender.com/)  
+🔹 **Live Demo:** [MovieGenie Frontend](https://movie-genie-woad.vercel.app)  
 🔹 **API Backend:** [MovieGenie Backend](https://movie-recommendation-backend-2opk.onrender.com/)
 
 ---
@@ -52,6 +48,15 @@ npm start
 The backend powers the AI-driven recommendations and quiz-based genre prediction. It efficiently handles API requests and delivers personalized movie suggestions.
 
 👉 **Live API:** [MovieGenie Backend](https://movie-recommendation-backend-2opk.onrender.com/)
+
+---
+
+## 🎥 **Movie Details & Watch Now**
+
+In addition to AI-powered recommendations, MovieGenie offers:
+
+- **Detailed Movie Pages** 📌: Click on any movie card to view in-depth details and a preview.
+- **Watch Now** 🎬: Instantly check where the movie is currently available for streaming.
 
 ---
 
