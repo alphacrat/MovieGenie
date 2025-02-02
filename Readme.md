@@ -1,94 +1,53 @@
 # MovieGenie
 
-MovieGenie is a web application that allows users to search for movies, view details, and manage their favorite lists.
+MovieGenie is a unique movie recommender application that not only suggests movies based on user preferences but also incorporates an AI-based quiz system. This quiz system analyzes the user's answers to predict the genre of movies they are most likely interested in watching. By combining traditional recommendation algorithms with AI-driven insights, MovieGenie offers a personalized and engaging movie discovery experience.
 
-## Tech Stack
+The frontend is hosted [here](https://moviegenie-client.onrender.com/)
+The backend is hosted [here](https://movie-recommendation-backend-2opk.onrender.com/).
 
-- **Backend**: Node.js, Express.js
-- **Frontend**: React.js, Redux
-- **Database**: PostgreSQL (hosted on Aiven)
-- **Others**: Docker, Nginx
+## Frontend
 
-## Prerequisites
+The frontend of MovieGenie is built with modern web technologies. To run the frontend locally, follow these steps:
+
+### Prerequisites
 
 - Node.js (v14 or higher)
 - npm (v6 or higher)
-- Docker
-- PostgreSQL
 
-## Getting Started
-
-### Backend
+### Installation
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/yourusername/MovieGenie.git
-   cd MovieGenie/backend
+   ```sh
+   git clone <frontend-repo-url>
+   cd <frontend-repo-directory>
    ```
 
-2. Install dependencies:
-
-   ```bash
-   npm install && npm run build
-   ```
-
-3. Set up environment variables:
-   Create a `.env` file in the `backend` directory and add the following:
-
-   ```env
-   PORT=8000
-   DATABASE_URL="postgres://avnadmin:*password*@movie-genie-v1-cmh-entry-exit.f.aivencloud.com:23427/defaultdb?sslmode=require"
-
-   ```
-
-4. Start the backend server:
-   ```bash
-   npm start
-   ```
-
-The backend server will be running at `http://localhost:8000`.
-
-### Frontend
-
-1. Navigate to the frontend directory:
-
-   ```bash
-   cd ../movie Recommender
-   ```
-
-2. Install dependencies:
-
-   ```bash
+2. Install the dependencies:
+   ```sh
    npm install
    ```
 
-3. Set up environment variables:
-   Create a `.env` file in the `movie Recommender` (frontend) directory and add the following:
+### Running the Application
 
-   ```env
-   VITE_TMDB_API_KEY
-   VITE_GEMINI_API_KEY
-   VITE_BACKEND_URL = https://moviegenie-backend-alphacrat.onrender.com
-   ```
+3. Start the development server:
 
-4. Start the development server:
-   ```bash
+   ```sh
    npm start
    ```
 
-The frontend application will be running at `http://localhost:5432`.
+4. Open your browser and navigate to `http://localhost:3000` to see the application running.
 
-## Running with Docker
+## Backend
 
-1. Build and run the Docker containers:
-   ```bash
-   docker-compose up --build
-   ```
+The backend of MovieGenie is responsible for handling API requests and providing movie recommendations. It is hosted [here](https://movie-recommendation-backend-2opk.onrender.com/).
 
-This will start both the backend and frontend services.
+## Contributing
 
-## Additional Information
+Contributions are welcome! Please open an issue or submit a pull request.
 
-- Ensure PostgreSQL is running and accessible from your local machine.
-- Update the `DATABASE_URL` in the `.env` file with your actual Aiven PostgreSQL URL.
+## License
+
+This project is licensed under the MIT License.
+
+## About the Application
