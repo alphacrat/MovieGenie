@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 
+const BACKEND_API = import.meta.env.VITE_BACKEND_URL
+
+
 export const useNavbar = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isNavOpen, setNavOpen] = useState(false);
@@ -26,7 +29,7 @@ export const useNavbar = () => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+                const response = await fetch(`${BACKEND_API}/api/v1/auth/me`, {
                     credentials: 'include',
                 });
 
@@ -72,7 +75,7 @@ export const useNavbar = () => {
 
     const handleUpdateAvatar = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/auth/updateAvatar', {
+            const response = await fetch(`${BACKEND_API}/api/v1/auth/updateAvatar`, {
                 method: 'PUT',
                 credentials: 'include',
                 headers: {
@@ -94,7 +97,7 @@ export const useNavbar = () => {
     };
 
     const refreshUserDetails = async () => {
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(`${BACKEND_API}/api/v1/auth/me`, {
             credentials: 'include',
         });
         if (response.ok) {
@@ -117,7 +120,7 @@ export const useNavbar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/auth/logout', {
+            const response = await fetch(`${BACKEND_API}/api/v1/auth/logout`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

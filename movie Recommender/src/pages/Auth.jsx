@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, Mail, User, Lock, RefreshCw, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+const BACKEND_API = import.meta.env.VITE_BACKEND_URL;
+
 const Auth = () => {
     const navigate = useNavigate();
     const [isLogin, setIsLogin] = useState(true);
@@ -78,8 +80,8 @@ const Auth = () => {
         setLoading(true);
 
         const endpoint = isLogin
-            ? 'http://localhost:8000/api/v1/auth/login'
-            : 'http://localhost:8000/api/v1/auth/register';
+            ? `${BACKEND_API}/api/v1/auth/login`
+            : `${BACKEND_API}/api/v1/auth/register`;
 
         try {
             const response = await fetch(endpoint, {

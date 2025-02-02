@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const BACKEND_API = import.meta.env.VITE_BACKEND_URL
+
+
 export const useAuth = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -8,7 +11,7 @@ export const useAuth = () => {
 
     const fetchUserProfile = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+            const response = await fetch(`${BACKEND_API}/api/v1/auth/me`, {
                 credentials: 'include',
             });
 

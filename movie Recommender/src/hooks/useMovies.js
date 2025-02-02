@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { API_BASE_URL, API_OPTIONS } from '../constants/config';
 import { getImageUrl } from '../constants/config';
 
+const BACKEND_API = import.meta.env.VITE_BACKEND_URL
+
 export const useMovies = () => {
     const [movieList, setMovieList] = useState([]);
     const [trendingMovieList, setTrendingMovieList] = useState([]);
@@ -14,7 +16,7 @@ export const useMovies = () => {
         setErrorMessage('');
         try {
             const response = await fetch(
-                `http://localhost:8000/api/v1/movie/search?query=${encodeURIComponent(query)}`,
+                `${BACKEND_API}/api/v1/movie/search?query=${encodeURIComponent(query)}`,
                 { credentials: 'include' }
             );
 

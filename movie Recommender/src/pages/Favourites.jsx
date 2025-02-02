@@ -3,6 +3,8 @@ import MovieCard from '../components/MovieCard';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
+const BACKEND_API = import.meta.env.VITE_BACKEND_URL
+
 const Favorites = () => {
     const [favoriteMovies, setFavoriteMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +14,7 @@ const Favorites = () => {
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
-                const savedResponse = await fetch('http://localhost:8000/api/v1/movie/saved', {
+                const savedResponse = await fetch(`${BACKEND_API}/api/v1/movie/saved`, {
                     credentials: 'include',
                 });
 

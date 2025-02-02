@@ -7,6 +7,7 @@ import MovieQuizModal from './MovieQuizModal';
 import Recommendations from './Recommendation';
 import GenreSuccessModal from './Success';
 
+
 const MovieContent = ({
     user,
     onLogout,

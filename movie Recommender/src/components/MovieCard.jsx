@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import MovieDetailsModal from '../pages/MovieDetails';
 import { Heart } from 'lucide-react';
 
+const BACKEND_API = import.meta.env.VITE_BACKEND_URL
+
 const MovieCard = ({ movie, onGenresUpdate }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [recommendedGenres, setRecommendedGenres] = useState([]);
@@ -21,7 +23,7 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
         const checkFavoriteStatus = async () => {
             try {
                 const response = await fetch(
-                    'http://localhost:8000/api/v1/movie/saved',
+                    `${BACKEND_API}/api/v1/movie/saved`,
                     {
                         credentials: 'include',
                     }
@@ -67,7 +69,7 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
 
         try {
             const response = await fetch(
-                `http://localhost:8000/api/v1/movie/${newFavoriteStatus ? 'favorite' : 'delete'}?movieId=${id}`,
+                `${BACKEND_API}/api/v1/movie/${newFavoriteStatus ? 'favorite' : 'delete'}?movieId=${id}`,
                 {
                     method: newFavoriteStatus ? 'POST' : 'DELETE',
                     credentials: 'include',
@@ -75,12 +77,10 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
             );
 
             if (!response.ok) {
-                // Revert on failure
                 console.error('Failed to update favorite status');
                 setIsFavorite(!newFavoriteStatus);
             }
         } catch (error) {
-            // Revert on error
             console.error('Error updating favorite status:', error);
             setIsFavorite(!newFavoriteStatus);
         } finally {
