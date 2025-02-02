@@ -84,7 +84,7 @@ const App = () => {
     <Routes>
       <Route path="/auth" element={<AuthPage />} />
       <Route
-        path="/*"
+        path="/"
         element={
           <MovieContent
             user={user}
