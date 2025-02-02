@@ -36,8 +36,6 @@ The frontend of MovieGenie is built with modern web technologies. To run the fro
    npm start
    ```
 
-4. Open your browser and navigate to `http://localhost:3000` to see the application running.
-
 ## Backend
 
 The backend of MovieGenie is responsible for handling API requests and providing movie recommendations. It is hosted [here](https://movie-recommendation-backend-2opk.onrender.com/).
