@@ -129,7 +129,7 @@ export const useNavbar = () => {
             });
 
             if (response.ok) {
-                window.location.href = '#/auth';
+                window.location.href = '/auth';
             } else {
                 console.error('Logout failed');
             }

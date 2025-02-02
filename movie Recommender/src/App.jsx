@@ -82,7 +82,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="#/auth" element={<AuthPage />} />
+      <Route path="/auth" element={<AuthPage />} />
       <Route
         path="/*"
         element={
@@ -110,7 +110,7 @@ const App = () => {
           />
         }
       />
-      <Route path="#/favorites" element={<Favourites />} />
+      <Route path="/favorites" element={<Favourites />} />
     </Routes>
   );
 };
