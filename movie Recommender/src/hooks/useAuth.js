@@ -19,11 +19,11 @@ export const useAuth = () => {
                 const userData = await response.json();
                 setUser(userData);
             } else {
-                navigate('/auth');
+                navigate('/auth', { replace: true });
             }
         } catch (error) {
             console.error('Error fetching user profile:', error);
-            navigate('/auth');
+            navigate('/auth', { replace: true });
         }
     };
 
@@ -36,7 +36,7 @@ export const useAuth = () => {
 
             if (response.ok) {
                 setUser(null);
-                navigate('/auth');
+                navigate('/auth', { replace: true });
             }
         } catch (error) {
             console.error('Logout error:', error);
