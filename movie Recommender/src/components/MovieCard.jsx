@@ -17,12 +17,11 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
         original_language
     } = movie;
 
-    // Check if movie is already favorited on component mount
     useEffect(() => {
         const checkFavoriteStatus = async () => {
             try {
                 const response = await fetch(
-                    'https://moviegenie-backend-alphacrat.onrender.com/api/v1/movie/saved',
+                    'http://localhost:8000/api/v1/movie/saved',
                     {
                         credentials: 'include',
                     }
@@ -30,7 +29,6 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    // Check if movieIds exists and is an array
                     if (data.movieIds && Array.isArray(data.movieIds)) {
                         const isMovieSaved = data.movieIds.includes(id);
                         setIsFavorite(isMovieSaved);
@@ -61,36 +59,30 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
 
     const handleFavoriteClick = async (e) => {
         e.stopPropagation();
-        setIsLoading(true);
-        try {
-            let response;
-            if (isFavorite) {
-                // Remove from favorites
-                response = await fetch(
-                    `http://localhost:8000/api/v1/movie/delete?movieId=${id}`,
-                    {
-                        method: 'DELETE',
-                        credentials: 'include',
-                    }
-                );
-            } else {
-                // Add to favorites
-                response = await fetch(
-                    `http://localhost:8000/api/v1/movie/favorite?movieId=${id}`,
-                    {
-                        method: 'POST',
-                        credentials: 'include',
-                    }
-                );
-            }
+        if (isLoading) return;
 
-            if (response.ok) {
-                setIsFavorite(!isFavorite);
-            } else {
+        setIsLoading(true);
+        const newFavoriteStatus = !isFavorite;
+        setIsFavorite(newFavoriteStatus);
+
+        try {
+            const response = await fetch(
+                `http://localhost:8000/api/v1/movie/${newFavoriteStatus ? 'favorite' : 'delete'}?movieId=${id}`,
+                {
+                    method: newFavoriteStatus ? 'POST' : 'DELETE',
+                    credentials: 'include',
+                }
+            );
+
+            if (!response.ok) {
+                // Revert on failure
                 console.error('Failed to update favorite status');
+                setIsFavorite(!newFavoriteStatus);
             }
         } catch (error) {
+            // Revert on error
             console.error('Error updating favorite status:', error);
+            setIsFavorite(!newFavoriteStatus);
         } finally {
             setIsLoading(false);
         }
@@ -99,7 +91,6 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
     return (
         <>
             <div className="movie-card relative cursor-pointer hover:scale-105 transition-all duration-200" onClick={handleClick}>
-                {/* Favorite Button */}
                 <button
                     onClick={handleFavoriteClick}
                     disabled={isLoading}

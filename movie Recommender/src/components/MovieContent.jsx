@@ -1,9 +1,9 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Search from './Search';
-import Spinner from './Spinner';
+import Spinner from '../constants/Spinner';
 import MovieCard from './MovieCard';
-import MovieQuizModal from './Quiz';
+import MovieQuizModal from './MovieQuizModal';
 import Recommendations from './Recommendation';
 import GenreSuccessModal from './Success';
 
@@ -29,6 +29,12 @@ const MovieContent = ({
     currentGenre,
     movieList
 }) => {
+    const getPosterUrl = (posterPath) => {
+        return posterPath
+            ? `https://image.tmdb.org/t/p/w500/${posterPath}`
+            : '/No-Poster.png';
+    };
+
     if (showRecommendations) {
         return <Recommendations genres={genres} onBackToHome={handleBackToHome} />;
     }
@@ -39,7 +45,7 @@ const MovieContent = ({
             <div className="wrapper">
                 <header className="relative -top-8 text-center">
                     <Navbar user={user} onLogout={onLogout} />
-                    <img src="/public/hero-img.png" alt="Hero Banner" className="-mt-6" />
+                    <img src="/hero-img.png" alt="Hero Banner" className="-mt-6" />
 
                     <div className="flex flex-col items-center -mt-8">
                         <h1 className="text-4xl">
@@ -90,7 +96,13 @@ const MovieContent = ({
                             {trendingMovieList.map((movie, index) => (
                                 <li key={movie.id}>
                                     <p>{index + 1}</p>
-                                    <img src={movie.poster_path} alt={movie.title} />
+                                    <img
+                                        src={getPosterUrl(movie.poster_path)}
+                                        alt={movie.title}
+                                        onError={(e) => {
+                                            e.target.src = '/No-Poster.png';
+                                        }}
+                                    />
                                 </li>
                             ))}
                         </ul>
@@ -112,7 +124,13 @@ const MovieContent = ({
                     ) : (
                         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             {movieList.map(movie => (
-                                <MovieCard key={movie.id} movie={movie} />
+                                <MovieCard
+                                    key={movie.id}
+                                    movie={{
+                                        ...movie,
+                                        poster_path: movie.poster_path || null
+                                    }}
+                                />
                             ))}
                         </ul>
                     )}
