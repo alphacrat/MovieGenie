@@ -56,8 +56,6 @@ const App = () => {
       setQuizGenres(genreIds);
       setIsModalOpen(false);
       setShowSuccessModal(true);
-    } else {
-      setMovieError('Unable to process genre selections');
     }
   };
 

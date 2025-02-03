@@ -29,7 +29,9 @@ export const useMovies = () => {
                 poster_path: movie.posterPath ? getImageUrl(movie.posterPath) : './No-Poster.png',
                 vote_average: movie.vote_average,
                 release_date: movie.releaseDate,
-                overview: movie.overview
+                overview: movie.overview,
+                language: movie.original_language
+
             }));
 
             setMovieList(processedMovies);
@@ -62,7 +64,8 @@ export const useMovies = () => {
                     poster_path: getImageUrl(movie.poster_path),
                     vote_average: movie.vote_average,
                     release_date: movie.release_date,
-                    overview: movie.overview
+                    overview: movie.overview,
+                    language: movie.original_language
                 }));
             setTrendingMovieList(processedMovies);
         } catch (error) {

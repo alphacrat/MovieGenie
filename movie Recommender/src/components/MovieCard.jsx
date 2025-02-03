@@ -16,7 +16,7 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
         vote_average,
         poster_path,
         release_date,
-        original_language
+        language
     } = movie;
 
     useEffect(() => {
@@ -119,20 +119,8 @@ const MovieCard = ({ movie, onGenresUpdate }) => {
                         <span>•</span>
                         <p className="year">{release_date ? release_date.slice(0, 4) : 'N/A'}</p>
                         <span>•</span>
-                        <p className="lang">{original_language ? original_language.toUpperCase() : 'N/A'}</p>
+                        <p className="lang">{language ? language.toUpperCase() : 'N/A'}</p>
                     </div>
-                    {recommendedGenres.length > 0 && (
-                        <div className="mt-2 flex flex-wrap gap-2">
-                            {recommendedGenres.map((genre, index) => (
-                                <span
-                                    key={index}
-                                    className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm"
-                                >
-                                    {genre}
-                                </span>
-                            ))}
-                        </div>
-                    )}
                 </div>
             </div>
             <MovieDetailsModal

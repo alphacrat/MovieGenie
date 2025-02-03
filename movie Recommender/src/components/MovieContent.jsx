@@ -112,11 +112,9 @@ const MovieContent = ({
 
                 <section className="all-movies">
                     <h2 className="mt-4">
-                        {currentGenre
-                            ? 'Recommended Movies'
-                            : isSearching
-                                ? `Results for "${searchQuery}"`
-                                : 'Popular Movies'}
+                        {isSearching
+                            ? `Results for "${searchQuery}"`
+                            : 'Popular Movies'}
                     </h2>
                     {isLoading ? (
                         <Spinner />

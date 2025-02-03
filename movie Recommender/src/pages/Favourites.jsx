@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MovieCard from '../components/MovieCard';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import Spinner from '../constants/Spinner';
 
 const BACKEND_API = import.meta.env.VITE_BACKEND_URL
 
@@ -11,55 +12,56 @@ const Favorites = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchFavorites = async () => {
-            try {
-                const savedResponse = await fetch(`${BACKEND_API}/api/v1/movie/saved`, {
-                    credentials: 'include',
-                });
 
-                if (!savedResponse.ok) {
-                    throw new Error('Failed to fetch saved movies');
-                }
+    const fetchFavorites = async () => {
+        try {
+            const savedResponse = await fetch(`${BACKEND_API}/api/v1/movie/saved`, {
+                credentials: 'include',
+            });
 
-                const savedData = await savedResponse.json();
-
-                if (!savedData.movieIds || !Array.isArray(savedData.movieIds)) {
-                    setFavoriteMovies([]);
-                    setIsLoading(false);
-                    return;
-                }
-
-                const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-                const API_OPTIONS = {
-                    method: 'GET',
-                    headers: {
-                        accept: 'application/json',
-                        Authorization: `Bearer ${API_KEY}`
-                    }
-                };
-
-                const moviePromises = savedData.movieIds.map(async (movieId) => {
-                    const response = await fetch(
-                        `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-                        API_OPTIONS
-                    );
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch movie ${movieId}`);
-                    }
-                    return response.json();
-                });
-
-                const movies = await Promise.all(moviePromises);
-                setFavoriteMovies(movies);
-            } catch (err) {
-                console.error('Error fetching favorites:', err);
-                setError(err.message);
-            } finally {
-                setIsLoading(false);
+            if (!savedResponse.ok) {
+                throw new Error('Failed to fetch saved movies');
             }
-        };
 
+            const savedData = await savedResponse.json();
+
+            if (!savedData.movieIds || !Array.isArray(savedData.movieIds)) {
+                setFavoriteMovies([]);
+                setIsLoading(false);
+                return;
+            }
+
+            const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+            const API_OPTIONS = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: `Bearer ${API_KEY}`
+                }
+            };
+
+            const moviePromises = savedData.movieIds.map(async (movieId) => {
+                const response = await fetch(
+                    `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+                    API_OPTIONS
+                );
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch movie ${movieId}`);
+                }
+                return response.json();
+            });
+
+            const movies = await Promise.all(moviePromises);
+            setFavoriteMovies(movies);
+        } catch (err) {
+            console.error('Error fetching favorites:', err);
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
         fetchFavorites();
     }, []);
 
@@ -69,7 +71,7 @@ const Favorites = () => {
                 <div className="pattern" style={{ backgroundImage: 'var(--background-image-hero-pattern)' }} />
                 <div className="wrapper">
                     <div className="flex items-center justify-center min-h-[50vh]">
-                        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500"></div>
+                        <Spinner />
                     </div>
                 </div>
             </main>
